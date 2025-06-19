@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ImportaExport</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #004AAD;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      background-color: #022c66;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+    section {
+      padding: 20px;
+    }
+    footer {
+      background-color: #004AAD;
+      color: white;
+      text-align: center;
+      padding: 15px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ImportaExport</h1>
+    <p>Llevamos el mundo hasta tu puerta</p>
+  </header>
+
+  <nav>
+    <a href="#quienes">¿Quiénes somos?</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section id="quienes">
+    <h2>¿Quiénes somos?</h2>
+    <p>Conectamos calidad internacional con atención personalizada en Venezuela. Desde entregas locales hasta importaciones globales, ImportaExport es tu socio de confianza.</p>
+  </section>
+
+  <section id="servicios">
+    <h2>Servicios</h2>
+    <ul>
+      <li>Entrega puerta a puerta en Caracas</li>
+      <li>Importación personalizada</li>
+      <li>Asesoría para exportaciones</li>
+    </ul>
+  </section>
+
+  <section id="contacto">
+    <h2>Contáctanos</h2>
+    <p>WhatsApp: +58 412-1234567</p>
+    <p>Correo: contacto@importaexport.com</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 ImportaExport. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>
