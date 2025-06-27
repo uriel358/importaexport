@@ -1,611 +1,843 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ImportaExport - Soluciones de Comercio Global</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>ImportaExpor | Logística y Envíos entre EE.UU., España y Venezuela</title>
+    <meta name="description" content="Soluciones integrales de paquetería, agenciamiento aduanal y procura internacional. Conectamos Estados Unidos y España con Venezuela de forma segura y eficiente.">
+    <meta name="keywords" content="envíos a Venezuela, aduana Venezuela, importación desde USA, importación desde España, procura internacional, paquetería internacional, logística internacional">
+    <meta name="author" content="ImportaExpor">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="icon" href="./images/favicon importaexport.jpg" type="image/jpeg">
 
     <style>
-        /* Variables CSS */
+        /* --------------------------------------------------
+        CSS - En un proyecto real, esto iría en un archivo separado (ej. styles.css)
+        -------------------------------------------------- */
         :root {
-            --dark-bg-blue: #0A1426;
-            --primary-accent-green: #2ECC71;
-            --secondary-accent-blue: #3498DB;
-            --text-light: #F0F5F9;
-            --text-dark: #2C3E50;
-            --bg-light: #ECF0F1;
-            --bg-white: #FFFFFF;
-            --border-subtle: #BDC3C7;
-            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.1);
-            --shadow-strong: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --primary-blue: #00008B; /* Azul Rey */
+            --accent-green: #2E8B57; /* Verde Esmeralda Oscuro */
+            --light-gray: #f4f7fc; /* Fondo claro para secciones */
+            --dark-text: #2c3e50; /* Texto oscuro principal */
+            --light-text: #ffffff; /* Texto claro */
+            --gray-text: #7f8c8d; /* Texto secundario/gris */
+            --font-family: 'Poppins', sans-serif;
+            --box-shadow: 0 10px 30px rgba(0, 0, 139, 0.1); /* Ajustado a primary-blue */
+            --border-radius: 8px;
+        }
+
+        /* --- Reseteo Básico y Estilos Globales --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
         }
 
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            background-color: var(--bg-light);
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            font-family: var(--font-family);
+            color: var(--dark-text);
+            line-height: 1.7;
+            background-color: var(--light-text);
         }
 
-        /* Estilos Globales */
-        h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--dark-bg-blue);
-            font-weight: 800;
-            margin-bottom: 20px;
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        h1 { font-size: 4.5em; line-height: 1.1; }
-        h2 { font-size: 3em; line-height: 1.2; }
-        h3 { font-size: 2em; line-height: 1.3; }
+        h1 { font-size: 3.2rem; color: var(--light-text); }
+        h2 { font-size: 2.2rem; color: var(--primary-blue); text-align: center; margin-bottom: 1rem; }
+        h3 { font-size: 1.4rem; color: var(--primary-blue); }
 
         p {
-            font-size: 1.15em;
-            line-height: 1.7;
-            margin-bottom: 15px;
+            color: var(--gray-text);
+            margin-bottom: 1rem;
         }
 
         a {
             text-decoration: none;
-            color: var(--secondary-accent-blue);
-            transition: color 0.3s ease, transform 0.2s ease;
-        }
-
-        a:hover {
-            color: var(--primary-accent-green);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 25px;
-        }
-
-        /* Botones (CTAs) */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background-color: var(--primary-accent-green);
-            color: var(--text-light);
-            padding: 16px 35px;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            box-shadow: var(--shadow-light);
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn:hover {
-            background-color: #27AE60;
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-strong);
-        }
-
-        .btn:active {
-            transform: translateY(0) scale(0.98);
-            box-shadow: var(--shadow-light);
-        }
-
-        /* Header (Sección Hero) */
-        header {
-            background-color: var(--dark-bg-blue);
-            min-height: 650px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--text-light);
-            padding: 40px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-animated-bg {
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(
-                45deg,
-                var(--dark-bg-blue) 0%,
-                var(--secondary-accent-blue) 30%,
-                var(--primary-accent-green) 70%,
-                var(--dark-bg-blue) 100%
-            );
-            background-size: 200% 200%;
-            animation: moveGradient 15s ease infinite alternate;
-            z-index: 0;
-        }
-
-        .header-ship-image {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 1200px;
-            height: auto;
-            background: url('https://images.unsplash.com/photo-1579737108990-843343997f7b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80') no-repeat bottom center/contain;
-            opacity: 0.3;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        header h1, header p, header .btn {
-            z-index: 2;
-            color: var(--text-light);
-            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
-        }
-
-        header h1 {
-            font-size: 5.5em;
-            font-weight: 900;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.8em;
-            max-width: 900px;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        @keyframes moveGradient {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
-        /* Navigation */
-        nav {
-            background-color: var(--bg-white);
-            padding: 18px 0;
-            text-align: center;
-            box-shadow: var(--shadow-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--dark-bg-blue);
-            font-weight: 600;
-            font-size: 1.05em;
-            padding: 5px 0;
-            position: relative;
+            color: var(--accent-green);
             transition: color 0.3s ease;
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 4px;
-            background: var(--primary-accent-green);
-            bottom: -8px;
-            left: 0;
-            transition: width 0.3s ease;
-            border-radius: 2px;
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        nav a:hover::after {
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem auto;
+            color: var(--gray-text);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--accent-green);
+            color: var(--light-text);
+            font-weight: 500;
+            border-radius: 50px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            border: 2px solid var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background-color: #226641; /* Tono de verde más oscuro para el hover */
+            border-color: #226641; /* Coincide con el hover */
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+        }
+
+        /* --- Animación de entrada --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Header y Navegación --- */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            display: flex; /* Para alinear el logo si es una imagen */
+            align-items: center;
+        }
+        .logo span { color: var(--accent-green); }
+        .logo img {
+            height: 40px; /* Ajusta el tamaño del logo */
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--dark-text);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:not(.btn):hover::after, .nav-links a:not(.btn).active::after {
             width: 100%;
         }
-        nav a:hover {
-            color: var(--primary-accent-green);
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            cursor: pointer;
         }
 
-        /* Sections */
-        .section {
-            padding: 100px 0;
-            background-color: transparent;
-            border-bottom: 1px solid var(--border-subtle);
-            position: relative;
-            overflow: hidden;
-        }
-        #servicios { background-color: var(--bg-white); }
-
-        .section:last-of-type {
-            border-bottom: none;
-        }
-
-        .section h2 {
+        /* --- Sección Hero --- */
+        #hero {
+            /* IMAGEN DE FONDO DEL HERO */
+            background: linear-gradient(rgba(0, 0, 139, 0.8), rgba(0, 0, 139, 0.7)), url('https://images.unsplash.com/photo-1578575437130-5b1273dc9798?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            min-height: 650px;
+            display: flex;
+            align-items: center;
             text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-            padding-bottom: 20px;
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #hero h1 {
+            margin-bottom: 1rem;
             font-weight: 700;
         }
 
-        .section h2::after {
-            content: '';
-            position: absolute;
-            width: 100px;
-            height: 6px;
-            background: var(--primary-accent-green);
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 0;
-            border-radius: 3px;
+        #hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
         }
 
-        .section p {
-            font-size: 1.15em;
-            max-width: 850px;
-            margin: auto;
-            text-align: center;
-            color: var(--text-dark);
+        /* --- Sección Servicios --- */
+        #services {
+            background-color: var(--light-gray);
         }
-
-        /* Cards */
-        .cards {
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            justify-content: center;
-            margin-top: 60px;
+            gap: 2rem;
         }
 
-        .card {
-            background: var(--bg-white);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            padding: 40px;
+        .service-card {
+            background-color: var(--light-text);
+            padding: 2.5rem 2rem;
             text-align: center;
-            border: 1px solid var(--border-subtle);
-            overflow: hidden;
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            will-change: transform, box-shadow;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-strong);
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 139, 0.15); /* Ajustado a primary-blue */
         }
 
-        .card i {
-            font-size: 4.5em;
-            color: var(--secondary-accent-blue);
-            margin-bottom: 25px;
-            transition: color 0.3s ease, transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .card:hover i {
-            color: var(--primary-accent-green);
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        .card h3 {
-            color: var(--dark-bg-blue);
-            margin-bottom: 15px;
-            font-weight: 700;
+        /* Estilo para las imágenes dentro de las tarjetas de servicio */
+        .service-card img {
+            max-width: 120px; /* Tamaño un poco más ajustado para íconos */
+            height: 120px; /* Mantener proporción si es cuadrada */
+            object-fit: contain; /* Asegura que la imagen se vea completa */
+            margin: 0 auto 1.5rem auto; /* Centrar y añadir margen inferior */
+            border-radius: 8px; /* Bordes ligeramente redondeados */
+            padding: 10px; /* Espacio alrededor de la imagen */
+            background-color: #f0f3f8; /* Un fondo muy suave para las imágenes */
         }
 
-        .card p {
-            font-size: 1em;
-            color: var(--text-dark);
+        .service-card h3 {
+            margin-bottom: 1rem;
         }
 
-        /* Contacto Section */
-        .contact-links {
+        /* --- Sección "Cómo Funciona" --- */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 4rem;
+        }
+
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: #e0e0e0;
+            z-index: -1;
+        }
+
+        .process-step {
+            text-align: center;
+            width: 23%;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--light-text);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            border-radius: 50%;
             display: flex;
             justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem auto;
+            transition: all 0.3s ease;
         }
 
-        .contact-links .btn i {
-            color: var(--text-light);
+        .process-step:hover .step-number {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            transform: scale(1.1);
         }
 
-        /* Footer */
-        footer {
-            background-color: var(--dark-bg-blue);
-            color: var(--text-light);
+        .process-step h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-text);
+        }
+
+        /* --- Sección Cobertura --- */
+        #coverage {
+            background-color: var(--light-gray);
+        }
+
+        .coverage-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .route-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 2rem 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .country-flag {
+            font-size: 4rem;
+        }
+
+        .arrows {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+        }
+
+        /* --- Sección Por Qué Elegirnos --- */
+        #why-us {
+            background-color: var(--light-text); /* Asegura que tenga el mismo fondo que las cards si es necesario */
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        .feature-item .icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+        .feature-item h4 {
+            color: var(--dark-text);
+        }
+
+        /* --- Banner CTA --- */
+        #cta-banner {
+            /* IMAGEN DE FONDO DEL CTA BANNER */
+            background: linear-gradient(rgba(0, 0, 139, 0.85), rgba(0, 0, 139, 0.85)), url('https://images.unsplash.com/photo-1587327918459-7176465451a5?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
+            padding: 5rem 0;
             text-align: center;
-            padding: 40px 20px;
-            font-size: 0.95em;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #cta-banner h2 {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+        }
+        #cta-banner p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
         }
 
-        footer p {
-            margin: 0;
-            color: var(--text-light);
-            opacity: 0.8;
+        /* --- Contacto --- */
+        #contact {
+            background-color: var(--light-gray);
+        }
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+        .contact-form {
+            background: var(--light-text);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+        .contact-form h3 {
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-family);
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-green);
         }
 
-        footer .social-links a {
-            color: var(--text-light);
-            font-size: 1.5em;
-            margin: 0 15px;
+        .contact-info-item {
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .contact-info-item .icon {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            padding: 4rem 0 2rem 0;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .footer-col h4 {
+            color: var(--light-text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .footer-col p, .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 0.5rem; }
+        .footer-col ul li a:hover { color: var(--accent-green); }
+
+        .social-links a {
             display: inline-block;
-            transition: color 0.3s ease, transform 0.2s ease;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text);
+            margin-right: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .social-links a:hover {
+            background-color: var(--accent-green);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        footer .social-links a:hover {
-            color: var(--primary-accent-green);
-            transform: translateY(-3px);
-        }
-        
-        /* Media Queries para Responsividad */
+        /* --- Media Queries para Responsividad --- */
         @media (max-width: 992px) {
-            header h1 {
-                font-size: 4em;
-            }
-            header p {
-                font-size: 1.5em;
-            }
-            h2 {
-                font-size: 2.5em;
-            }
-            .section {
-                padding: 80px 0;
-            }
-            .cards {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            }
+            .nav-links li:not(:last-child) { display: none; } /* Oculta links normales, deja el botón */
+            .contact-wrapper { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 3em;
-            }
-            header p {
-                font-size: 1.2em;
-            }
-            h2 {
-                font-size: 2em;
-            }
-            h3 {
-                font-size: 1.6em;
-            }
-            .btn {
-                padding: 14px 28px;
-                font-size: 1em;
-            }
-            nav .container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .card {
-                padding: 30px;
-            }
-            .card i {
-                font-size: 3.5em;
-            }
-        }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.8rem; }
+            section { padding: 3rem 0; }
 
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 2.5em;
-                letter-spacing: -1px;
-            }
-            header p {
-                font-size: 1em;
-            }
-            h2 {
-                font-size: 1.8em;
-            }
-            p {
-                font-size: 1em;
-            }
-            .section {
-                padding: 60px 0;
-            }
-            .cards {
-                grid-template-columns: 1fr;
-            }
-            .contact-links {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--light-text);
                 flex-direction: column;
+                align-items: flex-start;
+                padding: 6rem 2rem 2rem;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+                transition: right 0.4s ease-in-out;
             }
-        }
+            .nav-links.active { right: 0; }
+            .nav-links li { margin: 1rem 0; display: block; }
+            .nav-links .btn { display: inline-block; margin-top: 1rem; }
+            .menu-toggle { display: block; z-index: 1001; }
 
+            #hero { min-height: auto; }
+            .process-flow { flex-direction: column; gap: 2rem; }
+            .process-flow::before { display: none; }
+            .process-step { width: 100%; }
+            .route-card { flex-direction: column; text-align: center; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-animated-bg"></div>
-        <div class="header-ship-image"></div>
+    <header class="header">
         <div class="container">
-            <h1>ImportaExport</h1>
-            <p>Tu socio estratégico para **soluciones de comercio global** eficientes y seguras.</p>
-            <a href="#contacto" class="btn">
-                Contacta con Nosotros <i class="fas fa-arrow-right"></i>
+            <a href="#hero" class="logo">
+                <img src="./images/Logo importaexport.png" alt="Logo ImportaExpor">
+                Importa<span>Expor</span>
             </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#services">Servicios</a></li>
+                    <li><a href="#process">Cómo Funciona</a></li>
+                    <li><a href="#coverage">Cobertura</a></li>
+                    <li><a href="https://wa.me/584241933061?text=Hola!%20Me%20gustaría%20solicitar%20una%20cotización%20para%20un%20envío." class="btn" target="_blank" rel="noopener noreferrer">Solicitar Cotización</a></li>
+                </ul>
+            </nav>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <a href="#inicio">Inicio</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#nosotros">Nosotros</a>
-            <a href="#contacto">Contacto</a>
-        </div>
-    </nav>
-
     <main>
-        <section id="servicios" class="section">
+        <section id="hero">
+            <div class="container hero-content fade-in">
+                <h1>Conectamos tu Mundo.<br>Logística sin Fronteras.</h1>
+                <p>Tu socio confiable para envíos, aduanas y compras entre Estados Unidos, España y Venezuela. Simple, seguro y a tiempo.</p>
+                <a href="https://wa.me/584241933061?text=Hola!%20Me%20gustaría%20solicitar%20una%20cotización%20para%20un%20envío%20desde%20la%20sección%20Hero." class="btn" target="_blank" rel="noopener noreferrer">Solicitar Cotización Ahora</a>
+            </div>
+        </section>
+
+        <section id="services">
             <div class="container">
-                <h2>Nuestros Servicios Integrales</h2>
-                <p>Ofrecemos una amplia gama de soluciones personalizadas para simplificar tus operaciones de importación y exportación, garantizando eficiencia y cumplimiento normativo.</p>
-                <div class="cards">
-                    <div class="card fade-in">
-                        <i class="fas fa-globe-americas"></i>
-                        <h3>Logística Internacional</h3>
-                        <p>Gestión integral de transporte marítimo, aéreo y terrestre. Coordinamos cada paso para entregas a tiempo.</p>
+                <h2 class="fade-in">Nuestras Soluciones Integrales</h2>
+                <p class="section-subtitle fade-in">Diseñamos soluciones a la medida de tus necesidades, ya seas una empresa o un particular.</p>
+                <div class="services-grid">
+                    <div class="service-card fade-in" style="transition-delay: 0.1s;">
+                        <img src="https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Envío Aéreo y Marítimo">
+                        <h3>Envío Aéreo y Marítimo</h3>
+                        <p>Transportamos tu paquetería y carga de forma rápida y segura. Ofrecemos opciones flexibles para adaptarnos a tu presupuesto y urgencia.</p>
                     </div>
-                    <div class="card fade-in">
-                        <i class="fas fa-handshake"></i>
-                        <h3>Consultoría Aduanera</h3>
-                        <p>Asesoramiento experto en regulaciones, aranceles y documentación para evitar retrasos y sanciones.</p>
+                    <div class="service-card fade-in" style="transition-delay: 0.2s;">
+                        <img src="https://images.pexels.com/photos/3862638/pexels-photo-3862638.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Agenciamiento Aduanal">
+                        <h3>Agenciamiento Aduanal</h3>
+                        <p>Nos encargamos de todos los trámites de importación y exportación, garantizando un proceso de desaduanamiento fluido y sin complicaciones.</p>
                     </div>
-                    <div class="card fade-in">
-                        <i class="fas fa-box-open"></i>
-                        <h3>Gestión de Cadenas de Suministro</h3>
-                        <p>Optimización de tus procesos de abastecimiento y distribución para mayor eficiencia y costos reducidos.</p>
-                    </div>
-                    <div class="card fade-in">
-                        <i class="fas fa-file-invoice"></i>
-                        <h3>Documentación y Trámites</h3>
-                        <p>Preparamos y gestionamos toda la documentación necesaria para un despacho aduanero sin problemas.</p>
+                    <div class="service-card fade-in" style="transition-delay: 0.3s;">
+                        <img src="https://images.pexels.com/photos/3956488/pexels-photo-3956488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Servicio de Procura">
+                        <h3>Servicio de Procura</h3>
+                        <p>Compramos por ti en tiendas de EE.UU. y España. Consigue los productos que necesitas y nosotros nos encargamos de llevarlos hasta tu puerta.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="nosotros" class="section">
+        <section id="process">
             <div class="container">
-                <h2>¿Por Qué Elegir ImportaExport?</h2>
-                <p>Con años de experiencia en el sector, **ImportaExport** se distingue por su compromiso con la excelencia, la transparencia y la satisfacción del cliente. Nuestro equipo de expertos está dedicado a ofrecerte soluciones que impulsan el crecimiento de tu negocio global.</p>
-                <div class="cards">
-                    <div class="card fade-in">
-                        <i class="fas fa-award"></i>
-                        <h3>Experiencia Comprobada</h3>
-                        <p>Trayectoria exitosa en la gestión de operaciones de comercio internacional complejas.</p>
+                <h2 class="fade-in">Nuestro Proceso en 4 Simples Pasos</h2>
+                <p class="section-subtitle fade-in">Hemos simplificado la logística internacional para que tu experiencia sea transparente y sin estrés.</p>
+                <div class="process-flow">
+                    <div class="process-step fade-in" style="transition-delay: 0.1s;">
+                        <div class="step-number">1</div>
+                        <h4>Cotiza y Registra</h4>
+                        <p>Contáctanos con los detalles de tu envío o compra para recibir una cotización personalizada.</p>
                     </div>
-                    <div class="card fade-in">
-                        <i class="fas fa-users-cog"></i>
-                        <h3>Soluciones a Medida</h3>
-                        <p>Servicios adaptados a las necesidades específicas de tu empresa y tus productos.</p>
+                    <div class="process-step fade-in" style="transition-delay: 0.2s;">
+                        <div class="step-number">2</div>
+                        <h4>Envía a nuestro Almacén</h4>
+                        <p>Haz llegar tu carga o tus compras a nuestras bodegas seguras en Miami o Madrid.</p>
                     </div>
-                    <div class="card fade-in">
-                        <i class="fas fa-chart-line"></i>
-                        <h3>Eficiencia y Optimización</h3>
-                        <p>Reducimos tiempos y costos, maximizando la rentabilidad de tus operaciones.</p>
+                    <div class="process-step fade-in" style="transition-delay: 0.3s;">
+                        <div class="step-number">3</div>
+                        <h4>Proceso y Aduana</h4>
+                        <p>Consolidamos, re-empacamos si es necesario, y gestionamos todo el papeleo aduanal.</p>
+                    </div>
+                    <div class="process-step fade-in" style="transition-delay: 0.4s;">
+                        <div class="step-number">4</div>
+                        <h4>Entrega en Destino</h4>
+                        <p>Recibe tu mercancía en la puerta de tu casa u oficina en Venezuela. ¡Así de fácil!</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto" class="section">
+        <section id="coverage">
             <div class="container">
-                <h2>Conéctate con Nosotros</h2>
-                <p>¿Listo para llevar tus operaciones globales al siguiente nivel? Contáctanos hoy para una consulta gratuita y descubre cómo podemos ayudarte.</p>
-                <div class="contact-links">
-                    <a href="mailto:info@importaexport.com" class="btn">
-                        <i class="fas fa-envelope"></i> Enviar Correo
-                    </a>
-                    <a href="tel:+1234567890" class="btn">
-                        <i class="fas fa-phone"></i> Llámanos
-                    </a>
-                    <a href="https://wa.me/1234567890" target="_blank" class="btn">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
-                    </a>
+                <h2 class="fade-in">Rutas Estratégicas a tu Servicio</h2>
+                <p class="section-subtitle fade-in">Especialistas en los corredores comerciales más importantes para Venezuela.</p>
+                <div class="coverage-wrapper">
+                    <div class="route-card fade-in">
+                        <div class="country-flag" role="img" aria-label="Bandera de Estados Unidos">🇺🇸</div>
+                        <div class="arrows"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="country-flag" role="img" aria-label="Bandera de Venezuela">🇻🇪</div>
+                    </div>
+                    <div class="route-card fade-in" style="transition-delay: 0.2s;">
+                        <div class="country-flag" role="img" aria-label="Bandera de España">🇪🇸</div>
+                        <div class="arrows"><i class="fas fa-exchange-alt"></i></div>
+                        <div class="country-flag" role="img" aria-label="Bandera de Venezuela">🇻🇪</div>
+                    </div>
                 </div>
+            </div>
+        </section>
+
+        <section id="why-us">
+            <div class="container">
+                <h2 class="fade-in">¿Por Qué Confiar en ImportaExpor?</h2>
+                   <p class="section-subtitle fade-in">No solo movemos cajas, entregamos tranquilidad.</p>
+                <div class="why-us-grid">
+                    <div class="feature-item fade-in">
+                        <div class="icon"><i class="fas fa-shield-alt"></i></div>
+                        <div>
+                            <h4>Seguridad Garantizada</h4>
+                            <p>Tu carga está protegida en cada etapa del viaje. Ofrecemos opciones de seguro para tu total tranquilidad.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <div class="icon"><i class="fas fa-user-tie"></i></div>
+                        <div>
+                            <h4>Experiencia Comprobada</h4>
+                            <p>Años de experiencia en el complejo mundo de la aduana venezolana nos permiten anticipar y resolver cualquier reto.</p>
+                        </div>
+                    </div>
+                    <div class="feature-item fade-in">
+                        <div class="icon"><i class="fas fa-headset"></i></div>
+                        <div>
+                            <h4>Atención Personalizada</h4>
+                            <p>Un asesor dedicado te acompañará durante todo el proceso, respondiendo a tus dudas de forma rápida y clara.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cta-banner" class="fade-in">
+            <div class="container">
+                <h2>¿Listo para empezar a importar o exportar?</h2>
+                <p>Nuestro equipo de expertos está listo para asesorarte y ofrecerte la mejor solución logística para tus necesidades.</p>
+                <a href="https://wa.me/584241933061?text=Hola!%20Me%20gustaría%20hablar%20sobre%20un%20proyecto%20de%20logística%20que%20tengo." class="btn" target="_blank" rel="noopener noreferrer">Hablemos de tu Proyecto</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                   <h2 class="fade-in">Ponte en Contacto</h2>
+                   <p class="section-subtitle fade-in">Rellena el formulario para obtener una cotización o resolver tus dudas. Te responderemos en menos de 24 horas.</p>
+                   <div class="contact-wrapper">
+                    <div class="contact-form fade-in" style="transition-delay: 0.2s;">
+                        <h3>Formulario de Cotización</h3>
+                        <form action="#" method="POST">
+                             <div class="form-group">
+                                 <input type="text" id="name" name="name" required placeholder="Nombre Completo">
+                             </div>
+                             <div class="form-group">
+                                 <input type="email" id="email" name="email" required placeholder="Correo Electrónico">
+                             </div>
+                             <div class="form-group">
+                                 <input type="tel" id="phone" name="phone" required placeholder="Teléfono (Opcional)">
+                             </div>
+                             <div class="form-group">
+                                 <textarea id="message" name="message" rows="5" required placeholder="Describe tu envío o la compra que deseas realizar..."></textarea>
+                             </div>
+                             <button type="submit" class="btn">Enviar Solicitud</button>
+                           </form>
+                    </div>
+                    <div class="contact-info fade-in" style="transition-delay: 0.4s;">
+                        <h3>Nuestra Oficina</h3>
+                        <div class="contact-info-item">
+                            <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <h4>Caracas, Venezuela</h4>
+                                <p>Av. Francisco de Miranda, Torre A, Piso 10, Chacao, Caracas, 1060.</p>
+                            </div>
+                        </div>
+                           <div class="contact-info-item">
+                            <div class="icon"><i class="fas fa-warehouse"></i></div>
+                            <div>
+                                <h4>Almacenes</h4>
+                                <p>Recibe tus paquetes en nuestras sedes de Miami (EE.UU.) y Madrid (España).</p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p><a href="tel:+582129555555">+58 (212) 955-5555</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-info-item">
+                            <div class="icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:info@importaexpor.com">info@importaexpor.com</a></p>
+                            </div>
+                        </div>
+                       </div>
+                   </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 ImportaExport. Todos los derechos reservados.</p>
-            <div class="social-links">
-                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Importa<span>Expor</span></h4>
+                    <p>Conectando oportunidades, entregando confianza. Tu aliado en logística internacional.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="#hero">Inicio</a></li>
+                        <li><a href="#services">Servicios</a></li>
+                        <li><a href="#process">Cómo Funciona</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                        <li><a href="#coverage">Cobertura</a></li>
+                    </ul>
+                </div>
+                   <div class="footer-col">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#services">Envío Aéreo y Marítimo</a></li>
+                        <li><a href="#services">Agenciamiento Aduanal</a></li>
+                        <li><a href="#services">Servicio de Procura</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Síguenos</h4>
+                    <p>Mantente al día con nuestras noticias y ofertas.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ImportaExpor. Todos los derechos reservados. Diseñado por un experto para el éxito global.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Registrar ScrollTrigger de GSAP
-        gsap.registerPlugin(ScrollTrigger);
+    /* --------------------------------------------------
+    JAVASCRIPT - En un proyecto real, esto iría en un archivo separado (ej. script.js)
+    -------------------------------------------------- */
+    document.addEventListener('DOMContentLoaded', function() {
 
-        // Animación para elementos en el Header
-        gsap.from("header h1", { opacity: 0, y: 50, duration: 1.2, ease: "power3.out" });
-        gsap.from("header p", { opacity: 0, y: 50, delay: 0.3, duration: 1.2, ease: "power3.out" });
-        gsap.from("header .btn", { opacity: 0, y: 50, delay: 0.6, duration: 1.2, ease: "power3.out" });
+        // --- Manejo del menú móvil ---
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navLinkItems = document.querySelectorAll('.nav-links a');
 
-        // Animación para las tarjetas (cards)
-        gsap.utils.toArray(".card").forEach(card => {
-            gsap.from(card, {
-                opacity: 0,
-                y: 50,
-                duration: 0.8,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 80%", // Cuando la parte superior de la tarjeta entra al 80% del viewport
-                    toggleActions: "play none none reverse", // Play en scroll hacia abajo, reverse en scroll hacia arriba
-                }
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times'); // Cambia a una 'X' al abrir
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars'); // Vuelve al icono de hamburguesa al cerrar
+            }
+        });
+
+        navLinkItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
             });
         });
 
-        // Animación para los títulos de sección
-        gsap.utils.toArray(".section h2").forEach(heading => {
-            gsap.from(heading, {
-                opacity: 0,
-                y: 30,
-                duration: 0.7,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: heading,
-                    start: "top 90%",
-                    toggleActions: "play none none reverse",
+        // --- Animación de elementos al hacer scroll (fade-in) ---
+        const faders = document.querySelectorAll('.fade-in');
+
+        const appearOptions = {
+            threshold: 0.3, // Percentage of element visible to trigger
+            rootMargin: "0px 0px -50px 0px" // Adjusts when the element appears relative to the viewport
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(
+            entries,
+            appearOnScroll
+        ) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
                 }
             });
+        },
+        appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
         });
 
-        // Animación para los párrafos de sección
-        gsap.utils.toArray(".section p").forEach(paragraph => {
-            gsap.from(paragraph, {
-                opacity: 0,
-                y: 30,
-                duration: 0.7,
-                delay: 0.2, // Ligero retraso respecto al título
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: paragraph,
-                    start: "top 90%",
-                    toggleActions: "play none none reverse",
-                }
-            });
-        });
-
-        // Animación de los botones de contacto
-        gsap.utils.toArray(".contact-links .btn").forEach((btn, i) => {
-            gsap.from(btn, {
-                opacity: 0,
-                y: 30,
-                duration: 0.7,
-                delay: i * 0.1, // Escalonado
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".contact-links",
-                    start: "top 85%",
-                    toggleActions: "play none none reverse",
-                }
-            });
-        });
+    });
     </script>
 </body>
 </html>
